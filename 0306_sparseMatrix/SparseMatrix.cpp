@@ -112,7 +112,7 @@ float SparseMatrix::GetValue(int row, int col) const // 맨 뒤의 const는 함�
 		if (term_key == key)
 			return terms_[i].value;
 		else if (term_key > key)
-			break;
+			return 0.0f; // early return
 	}
 	
 	return 0.0f;
