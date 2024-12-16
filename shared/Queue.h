@@ -50,10 +50,10 @@ public:
 	int Size() const
 	{
 		// 하나하나 세는 방법 보다는 경우를 따져서 바로 계산하는 것이 빠르다.
-		if (front_ < rear_)
-			return rear_ - front_;
-		else
+		if (front_ > rear_) // 전체 용량에서 R와 F 사이에 없는 용량을 뺀다.
 			return capacity_ - (front_ - rear_);
+		else // rear도 0번째에서 시작하기에 if-else 구문을 이처럼 작성해야 한다.
+			return rear_ - front_;
 	}
 
 	void Resize() 
