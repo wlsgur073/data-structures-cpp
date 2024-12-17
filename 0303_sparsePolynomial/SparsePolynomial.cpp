@@ -63,7 +63,7 @@ SparsePolynomial SparsePolynomial::Add(const SparsePolynomial& poly)
 	{
 		if (this->terms_[i].exp == poly.terms_[j].exp)
 		{
-			temp.NewTerm(this->terms_[i].coef + poly.terms_[j++].coef, terms_[i].exp);
+			temp.NewTerm(this->terms_[i].coef + poly.terms_[j].coef, terms_[i].exp);
 			i++;
 			j++;
 		}
