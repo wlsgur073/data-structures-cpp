@@ -30,6 +30,7 @@ public:
 
 	~SinglyLinkedList()
 	{
+		// JVM 쓸때는 이런거 신경 안써도 됬는데, 편했찌? 시부럴 C++ 쓸때는 까먹지 말자.
 		Clear();
 	}
 
