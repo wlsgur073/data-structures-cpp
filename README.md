@@ -15,7 +15,7 @@ C++로 자료구조를 공부하며 작성한 코드와 예제를 모아둔 공�
 - **기타 자료구조 및 응용 문제**
 
 ## 참고 자료
-- [홍릉랩 자료구조 강의](https://honglab.co.kr/courses/data-structures)
+- [홍랩연구소](https://honglab.co.kr/courses/data-structures)
 
 
 > **중요**: 이 저장소는 개인 학습 목적으로만 사용합니다.
