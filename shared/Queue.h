@@ -61,27 +61,30 @@ public:
 		// 이미 IsFull()에서 front_ == rear_가 성립이 안된다는 가정하에.
 		// 경우를 나눠서 memcpy()로 블럭 단위로 복사하면 더 효율적.
 
-		int new_capacity = capacity_ * 2;
-		T* new_queue = new T[new_capacity];
+		T* new_queue = new T[capacity_ * 2];
 
-		if (front_ < rear_) // front가 rear보다 앞에 있을 때
-		{
-			memcpy(new_queue, queue_ + front_, sizeof(T) * (rear_ - front_ + 1)); // front 다음부터 rear까지
-		}
-		else // front가 rear보다 뒤에 있을 때
-		{
-			int front_to_end = capacity_ - front_ - 1;
-			int first_to_rear = rear_ + 1;
+		// if (front_ < rear_) // front가 rear보다 앞에 있을 때
+		// {
+		// 	memcpy(new_queue, queue_ + front_, sizeof(T) * (rear_ - front_ + 1)); // front 다음부터 rear까지
+		// }
+		// else // rear < front 일 때 두 번에 나눠서 복사 
+		// {
+		// 	int front_to_end = capacity_ - front_ - 1;
+		// 	int first_to_rear = rear_ + 1;
+			
+		// 	memcpy(new_queue + front_to_end, queue_, sizeof(T) * first_to_rear); // 처음부터 rear까지
+		// 	memcpy(new_queue, queue_ + front_ + 1, sizeof(T) * front_to_end); // front 다음부터 끝까지
+		// }
 
-			memcpy(new_queue + front_to_end, queue_, sizeof(T) * first_to_rear); // 처음부터 rear까지
-			memcpy(new_queue, queue_ + front_ + 1, sizeof(T) * front_to_end); // front 다음부터 끝까지
-		}
+		int count = 1; // 앞에 하나 띄어놔야 함
+		for (int i = (front_ + 1) % capacity_; i != (rear_ + 1) % capacity_; i = (i + 1) % capacity_)
+			new_queue[count++] = queue_[i];
 		
-		delete[] queue_;
-		queue_ = new_queue;
 		front_ = 0;
 		rear_ = capacity_ - 1; // resize했다는건 현재 rear가 capacity - 1이라는 뜻
-		capacity_ = new_capacity;
+		capacity_ *= 2;
+		delete[] queue_;
+		queue_ = new_queue;
 	}
 
 	void Enqueue(const T& item) // 맨 뒤에 추가, Push()
